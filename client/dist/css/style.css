@@ -13255,4 +13255,10 @@ BLOG Pagination
     border-radius: 10px;
     box-shadow: 2px 0px 10px 3px grey;
     margin: 50px;
+}.modal-center {
+    display:table;
+    height: 100%;
+    width: 100%;
 }
+.modal-align-center {: table-cell;vertical-align: middle;}
+.modal-content {height:inherit;margin: 0 auto;}

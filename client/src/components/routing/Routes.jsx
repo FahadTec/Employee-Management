@@ -14,10 +14,10 @@ const Routes = () => {
             {/* <Router history={history}/> */}
            
            <Switch>
+                       <Route path='/developers' component={Developers}/>
                        <Route path='/profile/:user_id' component={Profile}/>
                        <Route path='/login' component={Login}/>
                        <Route path='/register' component={Register}/>
-                       <Route path='/developers' component={Developers}/>
                        
             </Switch>
            

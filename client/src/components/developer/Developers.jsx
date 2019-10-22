@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import {Link} from 'react-router-dom';
 import {Animated} from 'react-animated-css';
 import axios from 'axios';
-import EditProfile from './EditProfile.jsx';
+// import EditProfile from './EditProfile.jsx';
 
 class Developers extends Component {
     state = {
@@ -64,8 +64,8 @@ class Developers extends Component {
                                                     <p>{user.email}</p>
                                                 </div>
                                                 <div className="col-md-4">
-                                                <button onClick={() => this.handleDelete(user._id)} className="btn btn-secondary ml-lg-2 mt-2">Delete Profile</button><br/>
-                                                 <EditProfile/>
+                                                 {/* <EditProfile/><br/> */}
+                                                <button onClick={() => this.handleDelete(user._id)} className="btn btn-secondary ml-lg-2 mt-2">Delete Profile</button>
                                                 </div>
                                             </div>
                                         </div>

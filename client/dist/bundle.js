@@ -45989,7 +45989,7 @@ exports.default = Developers;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -46007,80 +46007,89 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var EditProfile = function (_Component) {
-  _inherits(EditProfile, _Component);
+    _inherits(EditProfile, _Component);
 
-  function EditProfile() {
-    _classCallCheck(this, EditProfile);
+    function EditProfile() {
+        _classCallCheck(this, EditProfile);
 
-    return _possibleConstructorReturn(this, (EditProfile.__proto__ || Object.getPrototypeOf(EditProfile)).apply(this, arguments));
-  }
-
-  _createClass(EditProfile, [{
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement("br", null),
-        _react2.default.createElement(
-          "button",
-          { type: "button", className: "btn btn-success", "data-toggle": "modal", "data-target": "#exampleModalCenter" },
-          "Edit Profile"
-        ),
-        _react2.default.createElement(
-          "div",
-          { className: "modal fade", id: "exampleModalCenter", tabIndex: "-1", role: "dialog", "aria-labelledby": "exampleModalCenterTitle", "aria-hidden": "true" },
-          _react2.default.createElement(
-            "div",
-            { className: "modal-dialog modal-dialog-centered", role: "document" },
-            _react2.default.createElement(
-              "div",
-              { className: "modal-content" },
-              _react2.default.createElement(
-                "div",
-                { className: "modal-header" },
-                _react2.default.createElement(
-                  "h5",
-                  { className: "modal-title", id: "exampleModalCenterTitle" },
-                  "Modal title"
-                ),
-                _react2.default.createElement(
-                  "button",
-                  { type: "button", className: "close", "data-dismiss": "modal", "aria-label": "Close" },
-                  _react2.default.createElement(
-                    "span",
-                    { "aria-hidden": "true" },
-                    "\xD7"
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "modal-body" },
-                "..."
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "modal-footer" },
-                _react2.default.createElement(
-                  "button",
-                  { type: "button", className: "btn btn-secondary", "data-dismiss": "modal" },
-                  "Close"
-                ),
-                _react2.default.createElement(
-                  "button",
-                  { type: "button", className: "btn btn-primary" },
-                  "Save changes"
-                )
-              )
-            )
-          )
-        )
-      );
+        return _possibleConstructorReturn(this, (EditProfile.__proto__ || Object.getPrototypeOf(EditProfile)).apply(this, arguments));
     }
-  }]);
 
-  return EditProfile;
+    _createClass(EditProfile, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement("br", null),
+                _react2.default.createElement(
+                    "button",
+                    { className: "btn btn-success btn-lg", "data-toggle": "modal", "data-target": "#myModal" },
+                    "Edit Profile"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "modal fade", id: "myModal", tabIndex: "-1", role: "dialog", "aria-labelledby": "myModalLabel", "aria-hidden": "true" },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "modal-center" },
+                        _react2.default.createElement(
+                            "div",
+                            { className: "modal-dialog .modal-align-center" },
+                            _react2.default.createElement(
+                                "div",
+                                { className: "modal-content" },
+                                _react2.default.createElement(
+                                    "div",
+                                    { className: "modal-header" },
+                                    _react2.default.createElement(
+                                        "h4",
+                                        { className: "modal-title", id: "myModalLabel" },
+                                        "Modal title"
+                                    ),
+                                    _react2.default.createElement(
+                                        "button",
+                                        { type: "button", className: "close", "data-dismiss": "modal" },
+                                        _react2.default.createElement(
+                                            "span",
+                                            { "aria-hidden": "true" },
+                                            "\xD7"
+                                        ),
+                                        _react2.default.createElement(
+                                            "span",
+                                            { className: "sr-only" },
+                                            "Close"
+                                        )
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    "div",
+                                    { className: "modal-body" },
+                                    "..."
+                                ),
+                                _react2.default.createElement(
+                                    "div",
+                                    { className: "modal-footer" },
+                                    _react2.default.createElement(
+                                        "button",
+                                        { type: "button", className: "btn btn-default", "data-dismiss": "modal" },
+                                        "Close"
+                                    ),
+                                    _react2.default.createElement(
+                                        "button",
+                                        { type: "button", className: "btn btn-primary" },
+                                        "Save changes"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return EditProfile;
 }(_react.Component);
 
 exports.default = EditProfile;

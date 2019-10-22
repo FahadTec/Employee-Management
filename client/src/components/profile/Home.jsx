@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Animated } from 'react-animated-css';
+import EditProfile from '../developer/EditProfile.jsx';
 // import axios from 'axios';
 
 class Home extends Component {
@@ -8,10 +9,6 @@ class Home extends Component {
             color: 'black'
         }
         const employee = this.props.home;
-        
-        // console.log("Home data")
-        // // console.log( this.props.home);
-        // console.log(this.state.profile);
        
         return (
             <div>
@@ -63,6 +60,7 @@ class Home extends Component {
                                                 <li><a href="#"><i className="fa fa-dribbble"></i></a></li>
                                             </ul>
                                         </Animated>
+                                        <EditProfile id = {employee._id}/>
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
