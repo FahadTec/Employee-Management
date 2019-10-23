@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 class Nav extends Component {
+    logout = () => {
+        // localStorage.clear();
+        window.location.href = '/login'
+    }
     render() {
+       
         return (
             <div>
                 <header className="black-bg mh-header mh-fixed-nav nav-scroll mh-xs-mobile-nav nav-strict" id="mh-header">
@@ -33,6 +38,9 @@ class Nav extends Component {
                                         </li>
                                         <li className="nav-item">
                                             <NavLink className="nav-link" to="/login">Login</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink className="nav-link" onClick={this.logout} to="/logout">LogOut</NavLink>
                                         </li>
                                     </ul>
                                 </div>

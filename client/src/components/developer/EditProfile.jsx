@@ -1,58 +1,60 @@
 import React, { Component } from 'react';
-import {Link , Redirect} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 class EditProfile extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            firstName : '',
-            lastName : '',
-            email : ''
+            firstName: '',
+            lastName: '',
+            email: ''
         }
 
         this.firstName = this.firstName.bind(this);
         this.lastName = this.lastName.bind(this);
         this.email = this.email.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
     handleClick = (id) => {
         console.log(id)
         // e.preventDefault();
         axios.get(`http://localhost:5000/api/User/${id}`)
-        .then(res => {
-            // console.log('response' + res);
-            this.setState({
-                firstName : res.data.firstName,
-                lastName : res.data.lastName,
-                email : res.data.email
+            .then(res => {
+                // console.log('response' + res);
+                this.setState({
+                    firstName: res.data.firstName,
+                    lastName: res.data.lastName,
+                    email: res.data.email
+                })
             })
-        })
-        .catch(err => console.log(err));
+            .catch(err => console.log(err));
     }
-       componentDidMount = () => {
-           this.handleClick();
-        }
-    
+    componentDidMount = () => {
+        this.handleClick();
+    }
+
     firstName = (e) => {
-        this.setState({firstName : e.target.value})
+        this.setState({ firstName: e.target.value })
     }
     lastName = (e) => {
-        this.setState({lastName : e.target.value})
+        this.setState({ lastName: e.target.value })
     }
     email = (e) => {
-        this.setState({email : e.target.value})
+        this.setState({ email: e.target.value })
     }
 
     onSubmit = (e) => {
         e.preventDefault();
         const obj = {
-            firstName : this.state.firstName,
-            lastName : this.state.lastName,
-            email : this.state.email
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email
         };
         axios.patch(`http://localhost:5000/api/User/${this.props.id}`, obj)
-        .then(res => console.log(res.data));
+            .then(res => console.log(res.data));
 
+            // this.props.history.push('/profile/profile/:user_id')
     }
     render() {
         console.log("props edit")
@@ -96,7 +98,7 @@ class EditProfile extends Component {
 
                             </div>
                             <div className="modal-footer d-flex justify-content-center">
-                                <input type="button" onClick={this.onSubmit} className="btn btn-secondary" value="Update"/>
+                                <input type="button" onClick={this.onSubmit} className="btn btn-secondary" value="Update" />
                             </div>
                         </div>
                     </div>

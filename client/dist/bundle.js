@@ -44101,6 +44101,8 @@ var EditProfile = function (_Component) {
             _axios2.default.patch('http://localhost:5000/api/User/' + _this.props.id, obj).then(function (res) {
                 return console.log(res.data);
             });
+
+            // this.props.history.push('/profile/profile/:user_id')
         };
 
         _this.state = {
