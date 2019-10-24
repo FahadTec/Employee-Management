@@ -53,7 +53,6 @@ class EditProfile extends Component {
         };
         axios.patch(`http://localhost:5000/api/User/${this.props.id}`, obj)
             .then(res => console.log(res.data));
-
             // this.props.history.push('/profile/profile/:user_id')
     }
     render() {

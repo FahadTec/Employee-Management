@@ -8,6 +8,7 @@ import Footer from './Footer.jsx';
 import axios from 'axios';
 
 class Profile extends Component {
+    _isMounted = false;
    constructor(props){
        super(props);
        this.state={
@@ -15,6 +16,7 @@ class Profile extends Component {
     }
    }
     componentDidMount(){
+        this._isMounted = true;
         const userId = this.props.match.params.user_id;
         console.log(userId);
         axios.get(`http://localhost:5000/api/User/${userId}`)
@@ -25,7 +27,9 @@ class Profile extends Component {
             })
         }).catch(err => console.log(err));
     }
-    
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
    render(){
        console.log('educations change');
        console.log(this.state.employee);

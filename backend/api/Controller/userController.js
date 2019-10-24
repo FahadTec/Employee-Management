@@ -9,6 +9,7 @@ async function validatePassword(plainPassword, hashedPassword) {
     return await bcrypt.compare(plainPassword, hashedPassword);
 }
 
+
 //signup
 exports.signup = async function(req,res){
     try{

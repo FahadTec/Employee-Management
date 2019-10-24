@@ -5,7 +5,7 @@ class AddSkills extends Component {
     constructor(props){
         super(props);
         this.state={
-            skill : ''
+            skills : []
         }
         this.skills = this.skills.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -13,7 +13,7 @@ class AddSkills extends Component {
     }
     skills = (e) => {
         this.setState({
-            skill : e.target.value
+            skills : e.target.value
         })
     }
     handleClick = () => {
@@ -21,8 +21,9 @@ class AddSkills extends Component {
         axios.get(`http://localhost:5000/api/User/${this.props.skillId}`)
         .then(res => {
             this.setState({
-                skill : res.data.skill
+                skill : res.data.skills
             })
+            console.log(res.data.skills)
         }).catch(err => console.log(err));
     }
     componentDidMount(){
@@ -32,7 +33,7 @@ class AddSkills extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         const obj = {
-            skill : this.state.skill
+            skills : this.state.skills
         }
         console.log(obj);
         axios.put(`http://localhost:5000/api/User/addSkills/${this.props.skillId}`, obj)
@@ -69,7 +70,7 @@ class AddSkills extends Component {
                             <div className="md-form mb-5">
                                     <i className="fa fa-laptop prefix grey-text"></i>&nbsp;
                                     <label data-error="wrong" data-success="right"> Enter Skills One By One</label>
-                                    <input type="text" id="orangeForm-name" value={this.state.skill} onChange={this.skills} className="form-control validate" />
+                                    <input type="text" id="orangeForm-name" value={this.state.skills} onChange={this.skills} className="form-control validate" />
                                 </div>
                             </div>
                             <div className="modal-footer">
