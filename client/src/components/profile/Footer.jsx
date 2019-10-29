@@ -1,17 +1,24 @@
-import React, {Fragment} from 'react';
+import React, {Component, Fragment} from 'react';
 
-const Footer = () => {
-    return(
-        <Fragment>
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-12">
-                        <p className="p-4 text-center">All right reserved devbatch @2019 Developer Profile</p>
+class Footer extends Component {
+    componentWillMount(){
+        if(!localStorage.getItem('jwt-token')){
+            this.props.history.push('/')
+        }
+    }
+    render(){
+        return(
+            <Fragment>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <p className="p-4 text-center">All right reserved devbatch @2019 Developer Profile</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Fragment>
-    )
+            </Fragment>
+        )
+    }
 }
 
 export default Footer;

@@ -3,9 +3,10 @@ import { Link, NavLink } from 'react-router-dom';
 
 class Nav extends Component {
     logout = () => {
-        // localStorage.clear();
+        localStorage.clear();
         window.location.href = '/'
     }
+    
     render() {
        
         return (
@@ -34,7 +35,9 @@ class Nav extends Component {
                                     </ul>
                                     <ul className="navbar-nav ml-auto">
                                     <li className="nav-item">
-                                            <NavLink className="nav-link" to="/register">Register</NavLink>
+                                        {
+                                            localStorage.getItem('isAdmin') == 'true' ? <NavLink className="nav-link" to="/register">Register</NavLink> : null
+                                        }
                                         </li>
                                         {/* <li className="nav-item">
                                             <NavLink className="nav-link" to="/">Login</NavLink>

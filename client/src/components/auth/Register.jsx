@@ -42,10 +42,11 @@ class Register extends Component {
             password : this.state.password
         })
         console.log(body);
-       const data = fetch('http://localhost:5000/api/User/signup',{
+       const data = fetch('http://localhost:5000/auth/signup',{
             method:'POST',
             headers : {
-                'Accept' : 'application/json',
+                // 'Accept' : 'application/json',
+                'x-auth-token' : localStorage.getItem('jwt-token'),
                 'Content-Type' : 'application/json'
             },
             body : JSON.stringify({
@@ -57,10 +58,10 @@ class Register extends Component {
         }).then((res) => res.json())
          .then(res => {
              console.log(res);
-             if(res.data.code == 204){
+             if(res.data !== 204){
                  alert('User already exit');
              } else{
-                 this.props.history.push('/');
+                 this.props.history.push('/developers');
              }
          })
         .catch(err => console.log(err));

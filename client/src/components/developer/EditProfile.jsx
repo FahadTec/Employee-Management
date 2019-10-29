@@ -16,10 +16,10 @@ class EditProfile extends Component {
         this.email = this.email.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-    handleClick = (id) => {
+    handleClick = () => {
         // console.log(id)
         // e.preventDefault();
-        axios.get(`http://localhost:5000/api/User/${id}`)
+        axios.get(`http://localhost:5000/Users/viewProfile/${localStorage.getItem('id')}`)
             .then(res => {
                 // console.log('response' + res);
                 this.setState({
@@ -51,14 +51,19 @@ class EditProfile extends Component {
             lastName: this.state.lastName,
             email: this.state.email
         };
-        axios.patch(`http://localhost:5000/api/User/${this.props.id}`, obj)
+        axios.patch(`http://localhost:5000/Users/editProfile`,{
+            headers : {
+                'x-auth-token' : localStorage.getItem('jwt-token'),
+                'Content-Type' : 'application/json'
+            }
+        }, obj)
             .then(res => console.log(res.data));
             // this.props.history.push('/profile/profile/:user_id')
-            window.location.reload();
+            // window.location.reload();
     }
     render() {
         // console.log("props edit")
-        const id = this.props.id;
+        // const id = this.props.id;
         // console.log(id);
         return (
             <div>
@@ -98,7 +103,7 @@ class EditProfile extends Component {
                 </div>
 
                 <div>
-                    <Link to={"/edit/" + id} onClick={() => this.handleClick(id)} className="btn btn-success" data-toggle="modal" data-target="#modalRegisterForm">Edit Profile</Link>
+                    <button onClick={this.handleClick} className="btn btn-success" data-toggle="modal" data-target="#modalRegisterForm">Edit Profile</button>
                 </div>
             </div>
         )

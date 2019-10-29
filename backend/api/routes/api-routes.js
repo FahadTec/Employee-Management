@@ -1,34 +1,22 @@
 
  let router = require('express').Router();
+ var user = require('../Controller/userController');
 
- router.get('/', function (req, res) {
-    res.json({
-        status: 'API Its Working',
-        message: 'Welcome to Employment Management System',
-    });
-});
+ var VerifyToken = require('../Middleware/verifyToken');
+ var isAdmin = require('../Middleware/checkForAdmin')
+//Get all data 
+router.route('/').get(user.index);
 
 
-var user = require('../Controller/userController')
+// get,delete,update specific ser
 
-//Get all data and create new user
-router.route('/User')
-.get(user.index)
-.post(user.new);
-
-// get,delete,update specific user
-router.route('/User/:employee_id')
-.get(user.view)
-.delete(user.delete)
-.patch(user.update);
+router.route('/viewProfile/:employee_id',).get(user.view);
+router.route('/deleteProfile/:employee_id',).delete(VerifyToken,isAdmin,user.delete);
+router.route('/editProfile',).patch(VerifyToken,user.update);
 
 // add more information to specific user routes
-router.route('/User/addSkills/:employee_id').put(user.addSkills);
-router.route('/User/addQualification/:employee_id').put(user.addQualification);
-router.route('/User/addCertifications/:employee_id').put(user.addCertifications);
-
-//login and sign-up routes
-router.route('/User/signup').post(user.signup);
-router.route('/User/login').post(user.login);
+router.route('/addSkills').put(VerifyToken,user.addSkills);
+router.route('/addQualification').put(VerifyToken,user.addQualification);
+router.route('/addCertifications').put(VerifyToken,user.addCertifications);
 
 module.exports = router;

@@ -11,7 +11,7 @@ class Developers extends Component {
 
     componentDidMount(){
         
-        fetch('http://localhost:5000/api/User')
+        fetch('http://localhost:5000/Users')
         .then(res => res.json())
         .then(data => this.setState({
             users: data
@@ -19,7 +19,13 @@ class Developers extends Component {
         
     }
     handleDelete = (_id) => {
-        axios.delete(`http://localhost:5000/api/User/${_id}`)
+        console.log(_id)
+        axios.delete(`http://localhost:5000/Users/deleteProfile/${_id}`, {
+            headers : {
+                'x-auth-token' : localStorage.getItem('jwt-token'),
+                'content-Type' : 'application/json'
+            }
+        })
         .then(res => {
             const users = res.data;
             console.log(users)
@@ -27,7 +33,13 @@ class Developers extends Component {
         window.location.reload();
        
     }
+    componentWillMount(){
+        if(!localStorage.getItem('jwt-token')){
+            this.props.history.push('/')
+        }
+    }
     render() {
+        // console.log(_id)
         // console.log(this.state.users);
         const styles = {
            container : {
@@ -66,7 +78,9 @@ class Developers extends Component {
                                                 </div>
                                                 <div className="col-md-4">
                                                  {/* <EditProfile/><br/> */}
-                                                <button onClick={() => this.handleDelete(user._id)} className="btn btn-secondary ml-lg-2 mt-2">Delete Profile</button>
+                                                {
+                                                  localStorage.getItem('isAdmin') == 'true' ? <button onClick={() => this.handleDelete(user._id)} className="btn btn-secondary ml-lg-2 mt-2">Delete Profile</button> : null
+                                                }
                                                 </div>
                                             </div>
                                         </div>

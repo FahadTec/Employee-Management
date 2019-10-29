@@ -9,15 +9,17 @@ class App extends Component{
     render(){
         
         return(
-            <Router>
+           
                 <Fragment>
                     
-                    <Switch>
+                   <Router>
+                   <Switch>
                        <Route exact path='/' component={Login}/>
                        <Route component={Routes}/>
                     </Switch>
+                   </Router>
                 </Fragment>
-            </Router>
+          
         )
     }
 }

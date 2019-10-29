@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
-
 const  userSchema = new mongoose.Schema({
     
   firstName:{
@@ -26,8 +25,9 @@ const  userSchema = new mongoose.Schema({
 
   },
   isAdmin: {
-    type: Boolean,
-    default: false
+      type: Boolean,
+      default: false
+  
   },
   
   age: {
@@ -65,14 +65,14 @@ const  userSchema = new mongoose.Schema({
           name: String,
           issuedBy : String,
           issueDate: Date,
-          location: String
-  }],
-
+          location: String,
+          
+  }]
 
 });
 
 userSchema.pre('save', function(next) {
-  var user = this;
+  const user = this;
   bcrypt.hash(user.password, 10, function(err, hash) {
       if (err) throw err;
       user.password = hash;
@@ -80,6 +80,10 @@ userSchema.pre('save', function(next) {
       next();
   });
 });
+
+userSchema.methods.generateAuthToken = function() { 
+  return jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, process.env.secret);
+}
 
 var user = mongoose.model('User',userSchema);
 

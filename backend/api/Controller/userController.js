@@ -1,85 +1,10 @@
 const user = require("../models/user")
-const bcrypt = require("bcrypt")
-const credentialValidation = require("../validation/loginValidation")
-const validateRegisterInput = require("../validation/signupValidation")
-
-
-//function for validating password using bcrypt 
-async function validatePassword(plainPassword, hashedPassword) {
-    return await bcrypt.compare(plainPassword, hashedPassword);
-}
-
-
-//signup
-exports.signup = async function(req,res){
-    try{
-        
-       const {errors, isValid} =  validateRegisterInput(req.body);
-       if(!isValid){
-        return res.status(401).json(errors);
-       }
-        // check email and password validatios
-        
-
-        const {firstName,lastName, email, password, isAdmin} = req.body;
-       
-      
-
-        // check if email exists
-        const User = await user.findOne({email});
-        if(User){
-            res.status(400).json({error: "Email already exists."});
-        }
-
-       
-         
-         const newUser = new user ({firstName,  lastName, email, password , isAdmin})
-         const response= await newUser.save();
-         if(response){
-            res.status(201).json({data: newUser,msg: "You have signed up successfully"});
-         }
-        
-
-    }
-    catch(err){
-        res.status(400).json(err);
-    }
-};
-
-// login 
-exports.login = async function(req,res){
-    try{
-            const {errors, isValid} = credentialValidation(req.body.email,req.body.password);
-
-            if(!isValid){
-                return res.status(401).json(errors);
-            }
-
-        const email = req.body.email;
-        const password = req.body.password;
-        
-        
-        const u = await user.findOne({email});
-        
-        if(!u){
-            res.status(404).json({error: "Email not found"});
-        }
-        const pwd = await validatePassword(password ,u.password);
-        if(!pwd){
-            res.status(401).json({error: "incorrect password"});
-        }
-
-        res.status(200).json({data:u, msg: "Logged in Successfully"})
-    }
-    catch(err){
-        res.status(400).json(err)
-    }
-
-};
 
 
 
-//get all employees
+
+//RETURN ALL THE USERS IN THE DATABASE
+
 exports.index=  async function(req,res){
     try{
          const docs = await user.find();
@@ -96,29 +21,12 @@ exports.index=  async function(req,res){
         }
     };
   
-  // create new employee
-  exports.new = async function (req,res){
-     // Create a new user
-    try{
-        const employeeDetails = new user(req.body);
-        const response = await employeeDetails.save();
-        if(response){
-          res.status(201).json({msg: "user profile created"});
-        }
-    }
-    catch(err) {
-      res.status(400).json(err)
-    }
-  
-  };
-  
-  
   // view specific employee
   exports.view = async function(req,res){
     const id = req.params.employee_id;
   
     try{
-        const doc = await user.findById(id);
+        const doc = await user.findById(id ,{password:0});
         
          if(!doc || doc == undefined){
               res.status(404).json( {message : "employee profile can not be fetched"});
@@ -135,9 +43,11 @@ exports.index=  async function(req,res){
   
   // update information based on Employee's Id
   exports.update = async function(req,res){
-    const id = req.params.employee_id;
+    const id = req._id;
+    console.log("inside update api");
     try{
       const emp = await user.findById(id);
+      console.log(emp)
        if(!emp || emp == undefined){
             res.status(404).json( {message : "employee profile can not be fetched"});
        }
@@ -157,12 +67,14 @@ exports.index=  async function(req,res){
   exports.delete = async function(req,res){
     const id = req.params.employee_id;
     try{
-      const response = await user.findByIdAndRemove(id,function (err, user) {
-        if (err){
-            res.status(500).send("There was a problem deleting the user.");
-        }
-        res.status(204).send("User: "+ id +" was deleted.");
-      });
+      const response = await user.findByIdAndRemove(id);
+      if(response){
+        res.status(204).json({message:"user deleted"});
+      
+      } else{
+        res.status(500).json({msg:"There was a problem deleting the user."});
+      }
+      
     }
     catch (err){
           res.status(400).json(err)
@@ -171,7 +83,7 @@ exports.index=  async function(req,res){
   
   // updates employess profile if more qualification are to be added
   exports.addQualification = async function(req,res){
-     const id = req.params.employee_id;
+     const id = req._id;
      
      var data = "";
      if(req.body.qualifications != undefined && req.body.qualifications != ''){
@@ -203,7 +115,7 @@ exports.index=  async function(req,res){
 
  // updates employess profile if more skills are to be added
   exports.addSkills = async function(req,res){
-    const id = req.params.employee_id;
+    const id = req._id;
     
     var data = "";
     if(req.body.skills != undefined && req.body.skills != ''){
@@ -234,7 +146,7 @@ exports.index=  async function(req,res){
 
  // updates employess profile if more certifications are to be added
  exports.addCertifications = async function(req,res){
-    const id = req.params.employee_id;
+    const id = req._id;
     
     var data = "";
     if(req.body.certifications != undefined && req.body.certifications != ''){

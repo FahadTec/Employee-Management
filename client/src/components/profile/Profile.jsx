@@ -3,7 +3,6 @@ import Home from './Home.jsx';
 import About from './About.jsx';
 import Services from './Services.jsx';
 import Edu_Exp from './education/Edu_Exp.jsx';
-import Footer from './Footer.jsx';
 
 import axios from 'axios';
 
@@ -19,7 +18,7 @@ class Profile extends Component {
         this._isMounted = true;
         const userId = this.props.match.params.user_id;
         console.log(userId);
-        axios.get(`http://localhost:5000/api/User/${userId}`)
+        axios.get(`http://localhost:5000/users/viewProfile/${userId}`)
         .then(res => {
             const User = res.data;
             this.setState({
@@ -29,6 +28,11 @@ class Profile extends Component {
     }
     componentWillUnmount(){
         this._isMounted = false;
+    }
+    componentWillMount(){
+        if(!localStorage.getItem('jwt-token')){
+            this.props.history.push('/')
+        }
     }
    render(){
        console.log('educations change');
@@ -41,7 +45,7 @@ class Profile extends Component {
             <About about={this.state.employee} skill={this.props.match.params.user_id}/>
             <Services/>
             <Edu_Exp edu_exp={this.state.employee}/>
-            <Footer/>
+            
         </Fragment>
     )
    }

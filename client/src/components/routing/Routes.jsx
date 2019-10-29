@@ -5,6 +5,7 @@ import Profile from '../profile/Profile.jsx';
 // import Login from '../auth/Login.jsx';
 import Register from '../auth/Register.jsx';
 import Developers from '../developer/Developers.jsx';
+import Footer from '../profile/Footer.jsx';
 // import history from 'history';
 
 const Routes = () => {
@@ -14,7 +15,7 @@ const Routes = () => {
             
             {/* <Router history={history}/> */}
        
-           <Nav/>
+            <Route component={Nav}/>
            <Switch>
                        
                        <Route path='/developers' component={Developers}/>
@@ -23,6 +24,7 @@ const Routes = () => {
                        <Route path='/register' component={Register}/>
                        
             </Switch>
+            <Route component={Footer}/>
            
            
         </div>
