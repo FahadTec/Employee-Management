@@ -25,7 +25,12 @@ class AddSkills extends Component {
         }
         
         console.log(obj);
-        axios.put(`http://localhost:5000/api/User/addSkills/${this.props.skillId}`, obj)
+        axios.put(`http://localhost:5000/Users/addSkills`, obj, {
+            headers : {
+                'x-auth-token' : localStorage.getItem('jwt-token'),
+                'Content-Type' : 'application/json'
+            }
+        })
         .then(res => {
             console.log(res.data)
         });

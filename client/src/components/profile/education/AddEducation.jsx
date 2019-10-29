@@ -53,11 +53,16 @@ class AddEducation extends Component{
             cgpa : this.state.Cgpa
         }
         console.log(education);
-        axios.put(`http://localhost:5000/api/User/addQualification/${this.props.AddEducation._id}`, {qualifications:education})
+        axios.put(`http://localhost:5000/Users/addQualification`, {qualifications:education}, {
+            headers : {
+                'x-auth-token' : localStorage.getItem('jwt-token'),
+                'Content-Type' : 'application/json'
+            }
+        })
         .then(res => {
             console.log(res.data)
         }).catch(err => console.log(err));
-        window.location.reload();
+        // window.location.reload();
     }
     render(){
         console.log("Add Education");

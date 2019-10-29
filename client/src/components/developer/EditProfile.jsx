@@ -51,15 +51,15 @@ class EditProfile extends Component {
             lastName: this.state.lastName,
             email: this.state.email
         };
-        axios.patch(`http://localhost:5000/Users/editProfile`,{
+        axios.patch(`http://localhost:5000/Users/editProfile`,obj,{
             headers : {
                 'x-auth-token' : localStorage.getItem('jwt-token'),
                 'Content-Type' : 'application/json'
             }
-        }, obj)
+        })
             .then(res => console.log(res.data));
             // this.props.history.push('/profile/profile/:user_id')
-            // window.location.reload();
+            window.location.reload();
     }
     render() {
         // console.log("props edit")
