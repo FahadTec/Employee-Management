@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class EditProfile extends Component {
@@ -17,7 +17,7 @@ class EditProfile extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     handleClick = (id) => {
-        console.log(id)
+        // console.log(id)
         // e.preventDefault();
         axios.get(`http://localhost:5000/api/User/${id}`)
             .then(res => {
@@ -54,11 +54,12 @@ class EditProfile extends Component {
         axios.patch(`http://localhost:5000/api/User/${this.props.id}`, obj)
             .then(res => console.log(res.data));
             // this.props.history.push('/profile/profile/:user_id')
+            window.location.reload();
     }
     render() {
-        console.log("props edit")
+        // console.log("props edit")
         const id = this.props.id;
-        console.log(id);
+        // console.log(id);
         return (
             <div>
                 {/* <button classNameNameNameName="btn btn-success ml-lg-2 mt-2">Edit Profile</button> */}
@@ -88,13 +89,6 @@ class EditProfile extends Component {
                                     <label data-error="wrong" data-success="right">Your email</label>
                                     <input type="email" id="orangeForm-email" value={this.state.email} onChange={this.email} className="form-control validate" />
                                 </div>
-
-                                {/* <div className="md-form mb-4">
-                                    <i className="fa fa-lock prefix grey-text"></i>
-                                    <input type="password" id="orangeForm-pass" className="form-control validate" />
-                                    <label data-error="wrong" data-success="right" for="orangeForm-pass">Your password</label>
-                                </div> */}
-
                             </div>
                             <div className="modal-footer d-flex justify-content-center">
                                 <input type="button" onClick={this.onSubmit} className="btn btn-secondary" value="Update" />

@@ -40,7 +40,7 @@ class Profile extends Component {
             <Home home={this.state.employee}/>
             <About about={this.state.employee} skill={this.props.match.params.user_id}/>
             <Services/>
-             <Edu_Exp edu_exp = {this.state.employee}/>
+            <Edu_Exp edu_exp={this.state.employee}/>
             <Footer/>
         </Fragment>
     )

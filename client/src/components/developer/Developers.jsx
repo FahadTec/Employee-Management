@@ -23,11 +23,12 @@ class Developers extends Component {
         .then(res => {
             const users = res.data;
             console.log(users)
-        }).catch(err => console.log(err))
+        }).catch(err => console.log(err));
+        window.location.reload();
        
     }
     render() {
-        console.log(this.state.users);
+        // console.log(this.state.users);
         const styles = {
            container : {
             padding: '30px',

@@ -60,7 +60,7 @@ class Register extends Component {
              if(res.data.code == 204){
                  alert('User already exit');
              } else{
-                 this.props.history.push('/login');
+                 this.props.history.push('/');
              }
          })
         .catch(err => console.log(err));
@@ -115,7 +115,7 @@ class Register extends Component {
                               <div className="input-group" style={styles.space}>
                                   <input type="button" onClick={this.register} value="Register" className="btn btn-primary"/>
 
-                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <Link to='/login'><input type="button" value="Login" className="btn btn-primary"/></Link>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <Link to='/'><input type="button" value="Login" className="btn btn-primary"/></Link>
                               </div>
                            </form>
                         </div>

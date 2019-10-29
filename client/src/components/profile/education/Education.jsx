@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Animated } from 'react-animated-css';
+import AddEducation from './AddEducation.jsx';
 
 class Education extends Component {
-    state = {
-        educations: [],
-        error : null
+    constructor(props){
+        super(props);
+        this.state = {
+            educations: []
+        }
     }
 
     componentWillReceiveProps(newProps) {
@@ -19,8 +22,9 @@ class Education extends Component {
             marginBottom: '30px'
         }
         console.log("education update");
-        console.log(this.props.education);
-
+        console.log(this.state.educations);
+        const result = this.state.educations;
+        console.log(result);
 
         return (
             <div>
@@ -31,30 +35,31 @@ class Education extends Component {
                     </Animated>
                     <div className="mh-education-details">
 
-                        {
-                            this.state.educations.map((education) => {
-                                return <div key={education._id}>
-                                    {console.log(education.qualifications)}
+                        
 
                                     <Animated isVisible={true} animationInDuration={1000} animationInDelay={300} animationIn="fadeInUp">
 
 
-                                        {
-                                            education.qualifications.map((qualification) => {
+                                        {   
+                                            result.qualifications !== undefined ?
+                                            result.qualifications.map((qualification) => {
                                                 return (
                                                     <div key={qualification._id}>
                                                         <div className="mh-education-item dark-bg wow fadeInUp" style={styles}>
-                                                            <h4>{qualification.degreeName}</h4>
-                                                            <div className="mh-eduyear">{qualification.yearOfPassing}</div>
-                                                            <p>{qualification.percentage}</p>
+                                                            <h4>Degree Name : <span className="mh-eduyear">{qualification.degreeName}</span></h4>
+                                                            <p>Year Of Passing : <span className="mh-eduyear">{qualification.yearOfPassing}</span></p>
+                                                            <p><b>University : </b> <span className="mh-eduyear">{qualification.instituteName}</span></p>
+                                                            <p>Percentage : <span className="mh-eduyear">{qualification.percentage} %</span></p>
+                                                            <p><b>CGPA : </b> <span className="mh-eduyear">{qualification.cgpa}</span></p>
                                                         </div>
                                                     </div>
                                                 )
-                                            })
+                                            }) : <p>{"Add Qualifications"}</p>
                                         }
 
                                         {
-                                            education.certifications.map((certificate) => {
+                                            result.certifications !==undefined ?
+                                            result.certifications.map((certificate) => {
                                                 return (
                                                     <div key={certificate._id}>
                                                         <div className="mh-education-item dark-bg wow fadeInUp" style={styles}>
@@ -64,15 +69,12 @@ class Education extends Component {
                                                         </div>
                                                     </div>
                                                 )
-                                            })
+                                            }) : <p>{"Add Certifications"}</p>
                                         }
                                     </Animated>
-                                </div>
-                            })
-                        }
+                               <AddEducation AddEducation={this.state.educations}/>
                     </div>
                 </div>
-
             </div>
         )
     }

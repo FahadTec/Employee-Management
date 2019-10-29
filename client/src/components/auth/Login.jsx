@@ -46,7 +46,7 @@ class Login extends Component {
             console.log(userId);
         console.log(res);
         if(res.data.code == 200){
-            alert('Incorrect Password');
+            console.log(res.data);
         } else {
             console.log(res);
             this.props.history.push(`/profile/${userId}`);
@@ -83,7 +83,7 @@ class Login extends Component {
                                 </div>
                             </div>
                             <div className="col-md-4">
-                               <h1>Sign Up</h1><br/>
+                               <h1>Login</h1><br/>
                                <form>
                                   <div className="input-group" style={styles.main}>
                                   <span><i style={styles.mainIcon} className="fa fa-user"/></span><input  type="email"  onChange={this.email} className="form-control login-input"  placeholder="Your Email" name="email"/>
@@ -95,7 +95,7 @@ class Login extends Component {
                                   <div className="input-group" style={styles.space}>
                                       <input  type="button" onClick={this.login} value="Login" className="btn btn-primary"/>
     
-                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <Link to='/register'><input type="button" value="SignUp" className="btn btn-primary"/></Link>
+                                      {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <Link to='/register'><input type="button" value="SignUp" className="btn btn-primary"/></Link> */}
                                   </div>
                                </form>
                             </div>

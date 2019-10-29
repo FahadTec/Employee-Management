@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 class Nav extends Component {
     logout = () => {
         // localStorage.clear();
-        window.location.href = '/login'
+        window.location.href = '/'
     }
     render() {
        
@@ -28,17 +28,17 @@ class Nav extends Component {
                                             <NavLink className="nav-link" to="/developers">Developers</NavLink>
                                         </li>
                 
-                                        <li className="nav-item">
+                                        {/* <li className="nav-item">
                                             <NavLink className="nav-link" to="/dashboard">DashBoard</NavLink>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                     <ul className="navbar-nav ml-auto">
                                     <li className="nav-item">
                                             <NavLink className="nav-link" to="/register">Register</NavLink>
                                         </li>
-                                        <li className="nav-item">
-                                            <NavLink className="nav-link" to="/login">Login</NavLink>
-                                        </li>
+                                        {/* <li className="nav-item">
+                                            <NavLink className="nav-link" to="/">Login</NavLink>
+                                        </li> */}
                                         <li className="nav-item">
                                             <NavLink className="nav-link" onClick={this.logout} to="/logout">LogOut</NavLink>
                                         </li>

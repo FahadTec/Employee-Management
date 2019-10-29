@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import {BrowserRouter as Router , Route, Switch } from 'react-router-dom';
-import Nav from './profile/Nav.jsx';
 // import Developers from './developer/Developers.jsx';
 import Routes from './routing/Routes.jsx';
-import Register from './auth/Register.jsx';
+import Login from './auth/Login.jsx';
 // import {browserHistory} from 'history';
 
 class App extends Component{
@@ -12,9 +11,9 @@ class App extends Component{
         return(
             <Router>
                 <Fragment>
-                    <Nav/>
+                    
                     <Switch>
-                       <Route exact path='/' component={Register}/>
+                       <Route exact path='/' component={Login}/>
                        <Route component={Routes}/>
                     </Switch>
                 </Fragment>

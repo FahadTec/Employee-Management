@@ -3,14 +3,9 @@ import Education from './Education.jsx';
 import Experience from './Experience.jsx';
 
 class Edu_Exp extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            exp : this.props.edu_exp,
-            edu : this.props.edu_exp
-        }
-    }
     render() {
+        console.log("edu_exp");
+        console.log(this.props.edu_exp);
         return (
             <div>
                 <section className="mh-experince image-bg featured-img-one" id="mh-experience">
@@ -18,10 +13,10 @@ class Edu_Exp extends Component {
                 <div className="container">
                     <div className="row section-separator">
                     <div className="col-sm-12 col-md-6">
-                             <Experience experience = {this.state.exp}/>
+                             <Experience experience = {this.props.edu_exp}/>
                          </div>
                          <div className="col-sm-12 col-md-6">
-                             <Education education = {this.state.edu}/>
+                             <Education education = {this.props.edu_exp}/>
                          </div>
                          
                     </div>
