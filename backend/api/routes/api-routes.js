@@ -1,19 +1,23 @@
 
  let router = require('express').Router();
- var user = require('../Controller/userController');
+ let user = require('../Controller/userController');
+ let VerifyToken = require('../Middleware/verifyToken');
+ let requireAdmin = require('../Middleware/checkForAdmin');
+ let upload = require('../Middleware/imageLoader')
+ //const multer = require('multer');
 
- var VerifyToken = require('../Middleware/verifyToken');
- var isAdmin = require('../Middleware/checkForAdmin')
+
+
 //Get all data 
 router.route('/').get(user.index);
 
 
 // get,delete,update specific ser
 
-router.route('/viewProfile/:employee_id',).get(user.view);
-router.route('/deleteProfile/:employee_id',).delete(VerifyToken,isAdmin,user.delete);
-router.route('/editProfile',).patch(VerifyToken,user.update);
-
+router.route('/viewProfile/:employee_id').get(user.view);
+router.route('/deleteProfile/:employee_id').delete(VerifyToken,requireAdmin,user.delete);
+router.route('/editProfile/:employee_id').patch(VerifyToken,user.update);
+router.route('/uploadImage').post(VerifyToken,upload.single('image'),user.uploadImage)
 // add more information to specific user routes
 router.route('/addSkills').put(VerifyToken,user.addSkills);
 router.route('/addQualification').put(VerifyToken,user.addQualification);

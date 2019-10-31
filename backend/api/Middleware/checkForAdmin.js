@@ -3,5 +3,7 @@ function isAdmin(req, res, next) {
       return res.status(403).send('Access denied.');
     }
     return next();
-  }
+
+}
+
 module.exports = isAdmin

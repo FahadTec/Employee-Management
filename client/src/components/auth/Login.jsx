@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-// import {Link} from 'react-router-dom';
 import 'jwt-decode';
 import axios from 'axios';
 
@@ -37,6 +36,7 @@ class Login extends Component {
         })
         
         .then(res => {
+            // console.log(res.data)
             let decoded = jwtDecode(res.data.token)
             console.log(jwtDecode(res.data.token));
             localStorage.setItem('jwt-token', res.data.token);
@@ -47,7 +47,7 @@ class Login extends Component {
         })
             // localStorage.setItem('jwt-token' , res.data.token))
         // .then(res => console.log(res.data))
-        .catch(err => console.log(err))
+        .catch(error => console.log(error))
     }
     //     const body = JSON.stringify({
     //         email : this.state.email,
@@ -80,7 +80,7 @@ class Login extends Component {
     // })
     // .catch(err => console.log(err));
     // console.log(login);
-    componentWillMount(){
+    componentDidMount(){
         if(localStorage.getItem('jwt-token')){
             this.props.history.push(`/profile/${localStorage.getItem('id')}`)
         }

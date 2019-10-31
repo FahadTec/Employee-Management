@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Animated } from 'react-animated-css';
 import AddSkills from './AddSkills.jsx';
+import EditSkills from './EditSkills.jsx';
 
 
 class About extends Component {
@@ -10,7 +11,7 @@ class About extends Component {
             about : []
         }
     }
-    componentWillReceiveProps(newProps){
+    UNSAFE_componentWillReceiveProps(newProps){
         if(this.state.about !== newProps.about){
             this.setState({about : newProps.about})
         }
@@ -43,7 +44,7 @@ class About extends Component {
                                          and customization. Also I am good at</p>
                                     </Animated>
                                     <Animated isVisible={true} animationInDuration={800} animationInDelay={300} animationIn="fadeInUp">
-
+                                      
                                         <div className="mh-about-tag wow fadeInUp">
                                             <ul>
                                                 {
@@ -62,6 +63,7 @@ class About extends Component {
                                             </ul>
                                         </div> 
                                     </Animated>
+                                    <EditSkills list={this.state.about} editId = {this.state.about._id}/>
                                     <AddSkills skillId={this.props.skill}/>
                                     <Animated isVisible={true} animationInDuration={800} animationInDelay={400} animationIn="fadeInUp">
                                     <br/><br/> <a href="#" className="btn btn-fill wow fadeInUp">Download CV <i className="fa fa-download"></i></a>

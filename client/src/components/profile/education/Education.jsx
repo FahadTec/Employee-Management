@@ -50,7 +50,7 @@ class Education extends Component {
                                                             <p>Year Of Passing : <span className="mh-eduyear">{qualification.yearOfPassing}</span></p>
                                                             <p><b>University : </b> <span className="mh-eduyear">{qualification.instituteName}</span></p>
                                                             <p>Percentage : <span className="mh-eduyear">{qualification.percentage} %</span></p>
-                                                            <p><b>CGPA : </b> <span className="mh-eduyear">{qualification.cgpa}</span></p>
+                                                            <p><b>Marks / CGPA : </b> <span className="mh-eduyear">{qualification.cgpa}</span></p>
                                                         </div>
                                                     </div>
                                                 )

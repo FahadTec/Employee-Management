@@ -1,7 +1,5 @@
 const user = require("../models/user")
-
-
-
+const multer = require('multer')
 
 //RETURN ALL THE USERS IN THE DATABASE
 
@@ -43,11 +41,19 @@ exports.index=  async function(req,res){
   
   // update information based on Employee's Id
   exports.update = async function(req,res){
-    const id = req._id;
-    console.log("inside update api");
+    
+    var id = " ";
+    if(req.isAdmin){
+       id = req.params.employee_id
+    }
+    else {
+        id = req._id
+    }
+   
     try{
-      const emp = await user.findById(id);
-      console.log(emp)
+      //console.log(req.user)
+     const emp = await user.findById(id);
+      
        if(!emp || emp == undefined){
             res.status(404).json( {message : "employee profile can not be fetched"});
        }
@@ -174,3 +180,29 @@ exports.index=  async function(req,res){
     }
     
  };
+
+ exports.uploadImage = async function (req,res){
+     // console.log(req.body);
+      
+      try{
+          const id = req._id
+          const image = req.file
+          if (!image) {
+            res.status(400).send({status: false,data: 'No file is selected.'});
+          }
+          const emp = await user.findById(id);
+          if(!emp || emp == undefined){
+            res.status(404).json( {message : "employee profile can not be fetched"});
+          }
+          emp.image = req.file.path
+          const response = await emp.save();
+          if(response){
+            res.status(200).json({status: true, msg: "user image updated"});
+          }
+      }
+      catch(err){
+            res.status(400).json(err)
+      }
+
+      
+ }

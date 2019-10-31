@@ -43,7 +43,7 @@ class Nav extends Component {
                                             <NavLink className="nav-link" to="/">Login</NavLink>
                                         </li> */}
                                         <li className="nav-item">
-                                            <NavLink className="nav-link" onClick={this.logout} to="/logout">LogOut</NavLink>
+                                            <NavLink className="nav-link" onClick={this.logout} to="/logout">Logout</NavLink>
                                         </li>
                                     </ul>
                                 </div>

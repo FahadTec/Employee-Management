@@ -5,7 +5,7 @@ module.exports= function validateCredentials(email,password) {
   let errors = {};
 
   // Convert empty fields to an empty string so we can use validator functions
-  
+    
     email = !isEmpty(email) ? email : "";
     password = !isEmpty(password) ? password : "";
 

@@ -62,10 +62,12 @@ class AddEducation extends Component{
         .then(res => {
             console.log(res.data)
         }).catch(err => console.log(err));
-        // window.location.reload();
+        window.location.reload();
     }
     render(){
         console.log("Add Education");
+        console.log(this.props.AddEducation._id);
+        const sessionID = this.props.AddEducation._id;
         // console.log(this.state.AddQualification)
         // console.log(this.props.AddEducation._id)
         return(
@@ -102,7 +104,7 @@ class AddEducation extends Component{
                                 </div>
                                 <div className="md-form mb-5">
                                     <i className="fa fa-percent prefix grey-text"></i>&nbsp;
-                                    <label data-error="wrong" data-success="right"> CGPA</label>
+                                    <label data-error="wrong" data-success="right">Marks / CGPA</label>
                                     <input type="number" id="orangeForm-name" value={this.state.Cgpa} onChange={this.Cgpa} className="form-control validate" />
                                 </div>
                             </div>
@@ -113,7 +115,7 @@ class AddEducation extends Component{
                         </div>
                     </div>
                 </div>
-                <button type="button" style={{ fontSize: '20px', background: 'none', border: 'none' }} title="Add Education Here" data-toggle="modal" data-target="#modalEditEducation"><i className="fa fa-plus-circle"></i></button>
+               { localStorage.getItem('id') == sessionID ?  <button type="button" style={{ fontSize: '20px', background: 'none', border: 'none' }} title="Add Education Here" data-toggle="modal" data-target="#modalEditEducation"><i className="fa fa-plus-circle"></i></button> : null}
             </Fragment>
         )
     }

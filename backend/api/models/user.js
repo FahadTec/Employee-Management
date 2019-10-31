@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
 const  userSchema = new mongoose.Schema({
     
   firstName:{
@@ -67,23 +66,14 @@ const  userSchema = new mongoose.Schema({
           issueDate: Date,
           location: String,
           
-  }]
+  }],
+  image : {
+    type : String
+  }
 
 });
 
-userSchema.pre('save', function(next) {
-  const user = this;
-  bcrypt.hash(user.password, 10, function(err, hash) {
-      if (err) throw err;
-      user.password = hash;
-      console.log("LOG: Password hashed & user saved.");
-      next();
-  });
-});
 
-userSchema.methods.generateAuthToken = function() { 
-  return jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, process.env.secret);
-}
 
 var user = mongoose.model('User',userSchema);
 

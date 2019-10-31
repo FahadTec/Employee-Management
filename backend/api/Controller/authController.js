@@ -1,8 +1,16 @@
 const user = require("../models/user")
-const passport = require('passport')
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt')
 const credentialValidation = require("../validation/loginValidation")
 const validateRegisterInput = require("../validation/signupValidation")
+
+async function hashPassword(password) {
+    return await bcrypt.hash(password, 10);
+   }
+async function validatePassword(plainPassword, hashedPassword) {
+    return await bcrypt.compare(plainPassword, hashedPassword);
+}
+
 
 exports.signup = async function(req,res){
     
@@ -13,19 +21,21 @@ exports.signup = async function(req,res){
         return res.status(401).json(errors);
        }
       
-        const {firstName,lastName, email, password, isAdmin} = req.body;
+        const {firstName,lastName, email, password} = req.body;
 
         // check if email exists
         const User = await user.findOne({email});
         if(User){
             res.status(400).json({error: "Email already exists."});
         }
-        //var token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {expiresIn: 86400}) 
-        const newUser = new user ({firstName,  lastName, email, password})
+        const hashedPassword = await hashPassword(password);
+        
+        const newUser = new user ({firstName,  lastName, email, password:hashedPassword})
         const response= await newUser.save();
         if(response){
             res.status(201).json({sucess:true, msg: "You have signed up successfully"});
          }
+         
         
 
     }
@@ -36,43 +46,30 @@ exports.signup = async function(req,res){
 
 
 // login 
-exports.login = async function(req,res,next){
+exports.login = async function(req,res){
+    try{
     const {errors, isValid} = credentialValidation(req.body.email,req.body.password);
     if(!isValid){
             return res.status(401).json(errors);
     }
-    passport.authenticate('local', async (err, user, info) => {    
-    try {
-        if(err || !user){
-        const error = new Error('An Error occured')
-        return next(error);
-        }
-        req.login(user, { session : false }, async (error) => {
-        if( error ) return next(error)
-        //We don't want to store the sensitive information such as the
-        //user password in the token so we pick only the email and id
-        console.log(user.isAdmin)
-        const body = { _id : user._id, isAdmin : user.isAdmin };
-        //Sign the JWT token and populate the payload with the user email and id
-        const token = jwt.sign({ user : body },process.env.secret);
-        //Send back the token to the user
-        return res.status(200).json({ token:token });
-        });     
-    } catch (error) {
-            return next(error);
+    const email = req.body.email;
+    const password = req.body.password;
+    const User = await user.findOne({email});
+    if(!User){
+        res.status(400).json({error: "Email not found."});
     }
-})(req, res, next);
-             
-             
-             
-        
-        
-    
-    
-        
-        
-  
-   
-    
+    const pwd = await validatePassword(password ,User.password);
 
+    if(!pwd){
+        res.status(400).json({error: "incorrect password"});
+    }
+    const payload = { _id:User._id, isAdmin: User.isAdmin }
+    const token = jwt.sign({ user : payload },process.env.secret);
+    res.status(200).json({id:User._id, isAdmin:User.isAdmin,token:token, msg: "Logged in Successfully"})
+    
+  
+    }
+    catch(err){
+        res.status(401).json({error:err})
+    }
 };

@@ -58,7 +58,7 @@ class Register extends Component {
         }).then((res) => res.json())
          .then(res => {
              console.log(res);
-             if(res.data !== 204){
+             if(res.data == 200){
                  alert('User already exit');
              } else{
                  this.props.history.push('/developers');

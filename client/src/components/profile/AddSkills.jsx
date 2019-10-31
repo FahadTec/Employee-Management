@@ -45,8 +45,7 @@ class AddSkills extends Component {
         // // const id = this.props.skillId;
         return (
             <div>
-
-
+                
                 <div className="modal fade" id="basicExampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div className="modal-dialog" role="document">
@@ -71,7 +70,7 @@ class AddSkills extends Component {
                         </div>
                     </div>
                 </div>
-                <button type="button" style={{ fontSize: '20px', background: 'none', border: 'none' }} title="Add Skill Here" data-toggle="modal" data-target="#basicExampleModal"><i className="fa fa-plus-circle"></i></button>
+                { localStorage.getItem('id') == id ? <button type="button" style={{ fontSize: '20px', background: 'none', border: 'none' }} title="Add Skill Here" data-toggle="modal" data-target="#basicExampleModal"><i className="fa fa-plus-circle"></i></button> : null}
             </div>
         )
     }

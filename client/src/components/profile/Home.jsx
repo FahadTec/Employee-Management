@@ -9,7 +9,8 @@ class Home extends Component {
             color: 'black'
         }
         const employee = this.props.home;
-       
+        console.log('image');
+        console.log(employee.image);
         return (
             <div>
                 <section className="mh-home image-bg home-2-img" id="mh-home">
@@ -42,7 +43,7 @@ class Home extends Component {
                                             <li className="wow fadeInUp" style={styles}><i className="fa fa-phone"></i><a href="callto:">{employee.phoneNumber}</a></li>
                                         </Animated>
                                         <Animated isVisible={true} animationInDuration={800} animationInDelay={600} animationIn="fadeInUp">
-                                            <li className="wow fadeInUp" style={styles}><i className="fa fa-map-marker"></i><address>{employee.city} {employee.country}</address></li>
+                                            <li className="wow fadeInUp" style={styles}><i className="fa fa-map-marker"></i><address>{employee.city} , {employee.country}</address></li>
                                         </Animated>
                                         <Animated isVisible={true} animationInDuration={800} animationInDelay={600} animationIn="fadeInUp">
                                             <li className="wow fadeInUp" style={styles}><i className="fa fa-user"></i>{employee.gender} &nbsp; <b>Age :</b> {employee.age}</li>

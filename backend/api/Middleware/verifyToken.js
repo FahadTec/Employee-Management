@@ -1,5 +1,5 @@
-var jwt = require('jsonwebtoken')
-var User = require('../models/user')
+let jwt = require('jsonwebtoken')
+let User = require('../models/user')
 
 function verifyToken(req, res, next) {
   var token =  (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-auth-token'];
@@ -16,9 +16,6 @@ function verifyToken(req, res, next) {
     if(!user){
       res.status(401).json({error:"no user found"})
     }
-    //console.log(pl.payload.user.isAdmin)
-    //req.userId = decoded.id;
-    //console.log(user.isAdmin + " " + user._id)
     req.isAdmin = user.isAdmin;
     req._id = user._id;
     next();
