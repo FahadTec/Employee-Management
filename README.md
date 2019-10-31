@@ -1,4 +1,4 @@
-Employee-Management
+# Employee-Management
 Install node and git setup in your pc
 Open Employee-Management folder in code editor.
 Install node_modules in Employee-Management folder.
